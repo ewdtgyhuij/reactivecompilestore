@@ -1,35 +1,22 @@
-const cycleSort = (arr) => {
-  for (let start = 0; start < arr.length - 1; start++) {
-    let item = arr[start];
-    let pos = start;
-    for (let i = start + 1; i < arr.length; i++) {
-      if (arr[i] < item) {
-        pos++;
-      }
-    }
-    if (pos === start) {
-      continue;
-    }
-    while (item === arr[pos]) {
-      pos++;
-    }
-    if (pos !== start) {
-      [item, arr[pos]] = [arr[pos], item];
-    }
-    while (pos !== start) {
-      pos = start;
-      for (let i = start + 1; i < arr.length; i++) {
-        if (arr[i] < item) {
-          pos++;
-        }
-      }
-      while (item === arr[pos]) {
-        pos++;
-      }
-      if (item !== arr[pos]) {
-        [item, arr[pos]] = [arr[pos], item];
-      }
-    }
+function shuffle(array) {
+  let currentIndex = array.length,
+    randomIndex;
+
+  // While there are elements remaining
+  while (currentIndex !== 0) {
+    // Pick a remaining element
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // Swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
   }
-  return arr;
-};
+
+  return array;
+}
+
+const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
+console.log(shuffledDeck);
