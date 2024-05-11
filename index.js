@@ -1,22 +1,21 @@
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there are elements remaining
-  while (currentIndex !== 0) {
-    // Pick a remaining element
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // Swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+const combSort = (arr) => {
+  const shrinkFactor = 1.3;
+  let gap = arr.length;
+  let swapped = true;
+  while (gap > 1 || swapped) {
+    gap = Math.floor(gap / shrinkFactor);
+    if (gap < 1) {
+      gap = 1;
+    }
+    swapped = false;
+    let i = 0;
+    while (i + gap < arr.length) {
+      if (arr[i] > arr[i + gap]) {
+        [arr[i], arr[i + gap]] = [arr[i + gap], arr[i]];
+        swapped = true;
+      }
+      i++;
+    }
   }
-
-  return array;
-}
-
-const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
-console.log(shuffledDeck);
+  return arr;
+};
